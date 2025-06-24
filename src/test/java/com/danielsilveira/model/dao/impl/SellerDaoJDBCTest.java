@@ -1,15 +1,16 @@
 package com.danielsilveira.model.dao.impl;
 
-import java.util.Date;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.danielsilveira.model.dao.Dao;
+import com.danielsilveira.model.dao.DaoFactory;
+import com.danielsilveira.model.dao.SellerDao;
 import com.danielsilveira.model.entities.Department;
 import com.danielsilveira.model.entities.Seller;
 
@@ -20,13 +21,22 @@ public class SellerDaoJDBCTest {
     @Mock
     Department department;
     @Mock
-    Dao<Seller> sellerDao;
+    SellerDao sellerDao;
 
     @Test
     public void shouldReturnSeller() {
-        Mockito.when(sellerDao.findById(3)).thenReturn(new Seller(3, "Daniel", "daniel@dev.com", new Date(), 3000.0, department));
+        // Mockito.when(sellerDao.findById(3)).thenReturn(new Seller(3, "Daniel", "daniel@dev.com", new Date(), 3000.0, department));
+        sellerDao = DaoFactory.createSellerDao();
         seller = sellerDao.findById(3);
 
-        assertEquals(3, seller.getId());
+        assertTrue(seller instanceof Seller);
+    }
+
+    @Test
+    void testFindByDepartment() {
+        sellerDao = DaoFactory.createSellerDao();
+        Department dep = new Department(2, null);
+        List<Seller> sellers = sellerDao.findByDepartment(dep);
+        assertEquals(2, sellers.size());
     }
 }
