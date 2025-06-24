@@ -1,19 +1,25 @@
 package com.danielsilveira.model.entities;
 
+import java.util.Date;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class DepartmentTest {
+public class SellerTest {
     @InjectMocks
+    private Seller seller;
+
+    @Mock
     private Department department;
 
     @Test
-    public void shouldCreateDepartment() {
-        department = new Department(1, "Tecnologia");
-        assertNotNull(department);
+    public void shouldCreateNewSeller() {
+        seller = new Seller(1, "Daniel", "daniel@dev.com", new Date(), 3000.0, department);
+        assertNotNull(seller);
     }
 }
