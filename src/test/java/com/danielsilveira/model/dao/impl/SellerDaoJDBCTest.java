@@ -3,10 +3,11 @@ package com.danielsilveira.model.dao.impl;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -26,7 +27,7 @@ public class SellerDaoJDBCTest {
     public void shouldReturnSeller() {
         Mockito.when(sellerDao.findById(3)).thenReturn(new Seller());
         Seller seller = sellerDao.findById(3);
-        assertTrue(seller instanceof Seller);
+        assertInstanceOf(Seller.class, seller);
     }
 
     @Test
