@@ -48,4 +48,21 @@ public class SellerDaoJDBCTest {
         sellerDao.insert(new Seller());
         Mockito.verify(sellerDao).insert(any(Seller.class));
     }
+
+    @Test
+    void testUpdate() {
+        Mockito.when(sellerDao.findById(1)).thenReturn(new Seller());
+        Seller seller = sellerDao.findById(1);
+        seller.setName("name teste");
+        Mockito.doNothing().when(sellerDao).update(seller);
+        sellerDao.update(seller);
+        Mockito.verify(sellerDao).update(seller);
+    }
+
+    @Test
+    void testDeleteById() {
+        Mockito.doNothing().when(sellerDao).deleteById(1);
+        sellerDao.deleteById(1);
+        Mockito.verify(sellerDao).deleteById(1);
+    }
 }
